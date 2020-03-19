@@ -22,22 +22,22 @@ public class GrupoResource {
 	@Autowired
 	GrupoRepository grupoRepository;
 	
-	@GetMapping("/grupos")
+	@GetMapping("/groups")
 	public List<Grupo> get() {
 		return grupoRepository.findAll();
 	}
 	
-	@PostMapping("/grupos")
+	@PostMapping("/groups")
 	public Grupo save(@RequestBody Grupo grupo) {
 		return grupoRepository.save(grupo);
 	}
 	
-	@PutMapping("/grupos")
+	@PutMapping("/groups")
 	public Grupo update(@RequestBody Grupo grupo) {
 		return grupoRepository.save(grupo);
 	}
 	
-	@DeleteMapping("/grupos/{id}")
+	@DeleteMapping("/groups/{id}")
 	public void delete(@PathVariable(value = "id") long id) {
 		grupoRepository.deleteById(id);
 	}
