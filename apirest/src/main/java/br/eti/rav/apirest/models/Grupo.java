@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "grupo")
 public class Grupo implements Serializable {
@@ -21,24 +23,33 @@ public class Grupo implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	private String nome;
-	@OneToMany(mappedBy = "grupo", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "grupo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	private List<Card> card;
+	
+	public Grupo () {
+		
+	}
 	
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	public List<Card> getCard() {
 		return card;
 	}
+	
 	public void setCard(List<Card> card) {
 		this.card = card;
 	}
