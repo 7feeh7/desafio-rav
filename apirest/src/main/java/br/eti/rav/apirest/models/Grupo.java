@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "grupo")
@@ -20,15 +20,11 @@ public class Grupo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id 
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	private String nome;
-	@OneToMany(mappedBy = "grupo", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-	private List<Card> card;
-	
-	public Grupo () {
-		
-	}
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "grupo", cascade = CascadeType.ALL)
+	private List<Card> cards;
 	
 	public long getId() {
 		return id;
@@ -46,13 +42,12 @@ public class Grupo implements Serializable {
 		this.nome = nome;
 	}
 	
-	public List<Card> getCard() {
-		return card;
+	public List<Card> getCards() {
+		return cards;
 	}
 	
-	public void setCard(List<Card> card) {
-		this.card = card;
+	public void setCards(List<Card> cards) {
+		this.cards = cards;
 	}
-	
 	
 }
