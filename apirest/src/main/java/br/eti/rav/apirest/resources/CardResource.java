@@ -2,6 +2,7 @@ package br.eti.rav.apirest.resources;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,14 @@ public class CardResource {
 	
 	@PostMapping("/cards")
 	public Card save(@RequestBody Card card) {
+		if(!grupoRepository.findById(card.getGrupo().getId()).isPresent()) {
+			throw new RuntimeException("Grupo inexistente");
+		}
+		return cardRepository.save(card);
+	}
+	
+	@PutMapping("/cards")
+	public Card update(@RequestBody Card card) {
 		if(!grupoRepository.findById(card.getGrupo().getId()).isPresent()) {
 			throw new RuntimeException("Grupo inexistente");
 		}
