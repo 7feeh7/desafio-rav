@@ -1,25 +1,21 @@
 import React from 'react';
 
-import { MdAdd } from 'react-icons/md';
+import { MdClose } from 'react-icons/md';
 import { Container } from './styles';
 import Card from '../Card';
 
-export default function List() {
+export default function List({ data }) {
     return (
         <Container>
             <header>
-                <h2>Tarefas</h2>
+                <h2>{data.nome}</h2>
                 <button type="button">
-                    <MdAdd size={24} color="blue" />
+                    <MdClose size={24} color="#fff" />
                 </button>
             </header>
 
             <ul>
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                {data.cards.map(card => <Card key={card.id} data={card} />)}
             </ul>
         </Container>
     );

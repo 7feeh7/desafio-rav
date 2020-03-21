@@ -2,10 +2,10 @@ import React from 'react';
 
 import { Container } from './styles';
 
-export default function Card() {
+export default function Card({ data }) {
     return (
         <Container>
-            <p>Fazer migração completa de servidor</p>
+            <p>{data.descricao}</p>
         </Container>
     );
 }
