@@ -7,18 +7,16 @@ export const Container = styled.div`
     background: #f1f1f1;
     margin: 0 10px;
 
-    & + div {
-        border-left: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
     header {
         display: flex;
+        background: #1976d2;
         justify-content: space-between;
         align-items: center;
         
         h2 {
             font-weight: 500;
-            font-size: 16px;
+            font-size: 22px;
+            color: #fff;
             padding: 0 10px;
         }
     

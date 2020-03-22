@@ -9,11 +9,11 @@ export default function Board() {
     const[lists, setLists] = useState([]);
 
     useEffect(() => {
-        async function getLists() {
+        async function getList() {
             const response = await api.get('/groups');
             setLists(response.data);
         }
-        getLists();
+        getList();
     }, []);
 
     return (

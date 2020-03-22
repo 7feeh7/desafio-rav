@@ -9,18 +9,18 @@ export default createGlobalStyle`
         outline: 0;
         box-sizing: border-box;
     }
-
+    
     html, body, #root {
         height: 100%;
     }
-
+    
     body {
-        font: 14px 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif;
         background: #fff;
-        color:#333;
-        -webkit-font-smoothing: antialiased !important;
+        color: #333;
+        -webkit-font-smoothing: antialiased;
     }
-
+    
     ul {
         list-style: none;
     }
