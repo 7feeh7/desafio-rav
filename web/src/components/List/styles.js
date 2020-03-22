@@ -8,15 +8,15 @@ export const Container = styled.div`
     margin: 0 10px;
 
     header {
+        margin-top: 15px;
         display: flex;
-        background: #1976d2;
         justify-content: space-between;
         align-items: center;
         
         h2 {
             font-weight: 500;
-            font-size: 22px;
-            color: #fff;
+            font-size: 20px;
+            color: #333;
             padding: 0 10px;
         }
     

@@ -4,7 +4,7 @@ import { MdClose } from 'react-icons/md';
 import { Container } from './styles';
 import Card from '../Card';
 
-export default function List({ data }) {
+export default function List({ data, index: listIndex }) {
 
     function deleteCard(id){
         var confirma_exclusao = window.confirm('Tem certeza que deseja excluir este Card?');
@@ -25,7 +25,14 @@ export default function List({ data }) {
             </header>
 
             <ul>
-                {data.cards.map(card => <Card key={card.id} data={card} />)}
+                {data.cards.map((card, index) => (
+                    <Card 
+                        key={card.id} 
+                        listIndex={listIndex}
+                        index={index} 
+                        data={card} 
+                    />
+                ))}
             </ul>
         </Container>
     );
