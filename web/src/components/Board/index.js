@@ -26,7 +26,7 @@ export default function Board() {
             setLists(response.data);
         }
         getList();
-    }, []);
+    }, [lists]);
 
     return (
         <BoardContext.Provider value={{ lists, move }}>
