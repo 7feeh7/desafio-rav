@@ -11,15 +11,7 @@ import { Container } from './styles';
 export default function Board() {
     const[lists, setLists] = useState([]);
 
-    function move(fromList, toList, from, to) {
-        setLists(produce(lists, draft =>{
-            const dragged = draft[fromList].cards[from];
-            
-            draft[fromList].cards.splice(from, 1);
-            draft[toList].cards.splice(to, 0, dragged);
-        }))
-    }
-
+    
     useEffect(() => {
         async function getList() {
             const response = await api.get('/groups');
@@ -27,6 +19,21 @@ export default function Board() {
         }
         getList();
     }, [lists]);
+
+    async function handleCard(data) {
+        const response = await api.post('/cards', data);
+        console.log(response);
+    }
+    
+    function move(fromList, toList, from, to, card) {
+        handleCard(card);
+        setLists(produce(lists, draft =>{
+            const dragged = draft[fromList].cards[from];
+            
+            draft[fromList].cards.splice(from, 1);
+            draft[toList].cards.splice(to, 0, dragged);
+        }))
+    }
 
     return (
         <BoardContext.Provider value={{ lists, move }}>
