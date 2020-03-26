@@ -11,6 +11,7 @@ export default function List({ data, index: listIndex }) {
         
         if( confirma_exclusao ){
             api.delete(`/groups/${id}`);
+            window.location.reload();
         }
     
     }
