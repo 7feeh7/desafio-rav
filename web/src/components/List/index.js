@@ -7,7 +7,7 @@ import Card from '../Card';
 export default function List({ data, index: listIndex }) {
 
     function deleteList(id){
-        var confirma_exclusao = window.confirm('Tem certeza que deseja remover esta lista?');
+        var confirma_exclusao = window.confirm('Tem certeza que deseja remover este grupo?');
         
         if( confirma_exclusao ){
             api.delete(`/groups/${id}`);

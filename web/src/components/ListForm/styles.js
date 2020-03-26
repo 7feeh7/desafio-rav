@@ -8,12 +8,12 @@ export const Container = styled.div`
     padding: 0px 10px;
 
     header {
-        display: flex;
+        display: block;
         align-items: center;
 
         button {
             width: 100%;
-            color: #1976d2;
+            color: #333;
             border: 0; 
             font-size: 20px;
             cursor: pointer;
@@ -24,6 +24,7 @@ export const Container = styled.div`
         margin-top: 15px;
         width: 300px;
         padding:10px;
+        display: none;
 
         input {
             width: 100%;
@@ -31,8 +32,14 @@ export const Container = styled.div`
             font-size: 20px;
             color: #333;
             border-radius: 5px;
-            border: 1px solid #A9A9A9;
+            border: 1px solid rgba(192, 208, 230, 0.8);
         }
+    }
+    .closeHeader {
+        display: none;
+    }
+    .showForm {
+        display: block !important;
     }
 
 `;
