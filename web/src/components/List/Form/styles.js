@@ -16,12 +16,12 @@ export const Container = styled.div`
             color: #333;
             border: 0; 
             font-size: 20px;
+            padding: 15px;
             cursor: pointer;
         }
     }
 
     form {
-        margin-top: 15px;
         width: 300px;
         padding:10px;
         display: none;
@@ -32,9 +32,11 @@ export const Container = styled.div`
             font-size: 20px;
             color: #333;
             border-radius: 5px;
-            border: 1px solid rgba(192, 208, 230, 0.8);
+           /* border: 1px solid rgba(192, 208, 230, 0.8); */
+           border: 1px solid rgba(0,0,0,.2);
         }
     }
+
     .closeHeader {
         display: none;
     }

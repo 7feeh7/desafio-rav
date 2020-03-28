@@ -34,4 +34,13 @@ export const Container = styled.div`
         margin-top: 30px;
     }
 
+    .button-card {
+        padding: 15px;
+        width: 100%;
+        color: #333;
+        border: 0; 
+        font-size: 20px;
+        cursor: pointer;
+    }
+
 `;

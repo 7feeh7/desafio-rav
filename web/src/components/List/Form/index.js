@@ -1,15 +1,14 @@
 import React, { useState, useRef } from 'react';
 
-import api from '../../service/api';
-
 import { MdAdd } from 'react-icons/md';
 import { Container } from './styles';
 
-export default function ListForm() {
+
+export default function Form({ onSubmit }) {
+    const ref = useRef();
     const[header, setHeader] = useState('');
     const[form, setForm] = useState('');
     const[name, setName] = useState('');
-    const formRef = useRef(null);
 
 
     const showForm = () => {
@@ -19,7 +18,7 @@ export default function ListForm() {
     }
 
     const closeForm = event => {
-        const contain = formRef.current.contains(event.target);
+        const contain = ref.current.contains(event.target);
         if(!contain){
             setHeader('');
             setForm('');
@@ -27,9 +26,14 @@ export default function ListForm() {
         }
     }
 
-    const saveList = event => {
-        if(event.keyCode === 13 && name) {
-            api.post('/groups', { nome: name});
+    async function handleSubmit(e) {
+        if(e.keyCode === 13 && name) {
+            e.preventDefault();
+            
+            await onSubmit({ 
+                nome: name, 
+                cards: [] 
+            });
         }
     }
 
@@ -41,15 +45,12 @@ export default function ListForm() {
                 </button>
             </header>
 
-            <form ref={formRef} className={form}>
+            <form ref={ref} className={form}>
                 <input 
-                    id="teste"
-                    type="text"
                     placeholder="Insira o nome do grupo"
-                    autoComplete="off"
-                    onChange={e => setName(e.target.value)} 
-                    onKeyDown={e => saveList(e)}
                     required
+                    onChange={e => setName(e.target.value)} 
+                    onKeyDown={e => handleSubmit(e)}
                 />
             </form>    
         </Container>

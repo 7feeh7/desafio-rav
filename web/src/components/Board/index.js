@@ -5,16 +5,25 @@ import BoardContext from './context';
 import api from '../../service/api';
 
 import List from '../List';
-import ListForm from '../ListForm';
+import ListForm from '../List/Form';
 
 import { Container } from './styles';
 
 export default function Board() {
     const[lists, setLists] = useState([]);
 
-    async function getList() {
-        const response = await api.get('/groups');
-        setLists(response.data);
+    useEffect(() => {
+        async function getList() {
+            const response = await api.get('/groups');
+            setLists(response.data);
+        }
+
+        getList();
+    }, []);
+
+    async function handleList(data) {
+        const response = await api.post('/groups', data);
+        setLists([...lists, response.data]);
     }
 
     async function handleCard(data) {
@@ -22,9 +31,7 @@ export default function Board() {
         return response;
     }
 
-    useEffect(() => {
-        getList();
-    }, []);
+
 
 
     function move(fromList, toList, from, to, card) {
@@ -41,7 +48,7 @@ export default function Board() {
         <BoardContext.Provider value={{ lists, move }}>
             <Container>
                 {lists.map((list, index) => <List key={list.id} index={index}  data={list} />)}
-                <ListForm />
+                <ListForm onSubmit={handleList} />
             </Container>
         </BoardContext.Provider>
     );
