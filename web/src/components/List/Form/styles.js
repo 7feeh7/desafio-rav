@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
 
@@ -37,11 +37,15 @@ export const Container = styled.div`
         }
     }
 
-    .closeHeader {
-        display: none;
-    }
-    .showForm {
-        display: block !important;
-    }
+    ${props => props.visibilityForm && css`
+        header{
+            display: none;
+        }
+
+        form {
+            display: block !important;
+        }
+    
+    `}
 
 `;

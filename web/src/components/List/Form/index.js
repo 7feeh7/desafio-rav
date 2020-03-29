@@ -3,49 +3,41 @@ import React, { useState, useRef } from 'react';
 import { MdAdd } from 'react-icons/md';
 import { Container } from './styles';
 
-
 export default function Form({ onSubmit }) {
     const ref = useRef();
-    const[header, setHeader] = useState('');
-    const[form, setForm] = useState('');
+    const[visibilityForm, setVisibilityForm] = useState('');
     const[name, setName] = useState('');
 
 
     const showForm = () => {
-        setHeader('closeHeader');
-        setForm('showForm');
+        setVisibilityForm(true);
         document.body.addEventListener("click", closeForm);
     }
 
-    const closeForm = event => {
-        const contain = ref.current.contains(event.target);
+    const closeForm = e => {
+        const contain = ref.current.contains(e.target);
         if(!contain){
-            setHeader('');
-            setForm('');
+            setVisibilityForm(false);
             document.removeEventListener("click", closeForm);
         }
     }
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         if(e.keyCode === 13 && name) {
             e.preventDefault();
-            
-            await onSubmit({ 
-                nome: name, 
-                cards: [] 
-            });
+            await onSubmit({ nome: name, cards: [] });
         }
     }
 
     return(
-        <Container>
-            <header className={header}>
+        <Container ref={ref} visibilityForm={visibilityForm}>
+            <header>
                 <button onClick={showForm}>
                     Novo grupo <MdAdd />
                 </button>
             </header>
 
-            <form ref={ref} className={form}>
+            <form >
                 <input 
                     placeholder="Insira o nome do grupo"
                     required
