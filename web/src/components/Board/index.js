@@ -17,13 +17,18 @@ export default function Board() {
             const response = await api.get('/groups');
             setLists(response.data);
         }
-
         getList();
     }, []);
 
     async function handleList(data) {
         const response = await api.post('/groups', data);
         setLists([...lists, response.data]);
+    }
+
+    async function handleDeleteList(itemId) {
+        await api.delete(`/groups/${itemId}`);
+        const updateList = lists.filter(list => list.id !== itemId);
+        setLists(updateList);
     }
 
     async function handleCard(data) {
@@ -47,7 +52,7 @@ export default function Board() {
     return (
         <BoardContext.Provider value={{ lists, move }}>
             <Container>
-                {lists.map((list, index) => <List key={list.id} index={index}  data={list} />)}
+                {lists.map((list, index) => <List key={list.id} index={index}  data={list} onDelete={handleDeleteList} />)}
                 <ListForm onSubmit={handleList} />
             </Container>
         </BoardContext.Provider>

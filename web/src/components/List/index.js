@@ -6,15 +6,14 @@ import Card from '../Card';
 
 import CardModal from '../Card/Modal';
 
-export default function List({ data, index: listIndex }) {
+export default function List({ data, index: listIndex, onDelete }) {
     const[cardModal, setCardModal] = useState('');
     
-    const deleteList = id => {
+    async function handleDelete(itemId) {
         var confirma_exclusao = window.confirm('Tem certeza que deseja remover este grupo?');
-        
+       
         if( confirma_exclusao ){
-            api.delete(`/groups/${id}`);
-            window.location.reload();
+            await onDelete(itemId);
         }
     
     }
@@ -24,7 +23,7 @@ export default function List({ data, index: listIndex }) {
             <header>
                 <h2>{data.nome}</h2>
                 <button type="button">
-                    <MdClose size={24} color="#fff" onClick={() => { deleteList(data.id) }} />
+                    <MdClose size={24} color="#fff" onClick={() => handleDelete(data.id)} />
                 </button>
             </header>
 
