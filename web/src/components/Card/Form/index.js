@@ -1,34 +1,23 @@
 import React, { useState } from 'react';
-import api from '../../../service/api';
-
 import { Container } from './styles';
 
-export default function Form({ dataId }) {
-    const[idList, setIdList] = useState('');
+export default function Form({ listId, onSubmit }) {
     const[descricao, setDescricao] = useState('');
 
-    const salvarCard = () => {
-
-        setIdList(dataId);
-
-        if(idList){
-            api.post('/cards', { descricao,  grupo: { id: idList}})
-            .then(res => {
-                console.log(res.data)
-            });
-        }
-        
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        await onSubmit({ descricao : descricao, grupo: { id: listId }});
     }
     
     return(
         <Container>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
                     onChange={e => setDescricao(e.target.value)}
                     required
                     />
-        <button onClick={() => {salvarCard()}}>Salvar</button>
+                <button type="submit">Salvar</button>
             </form>
         </Container>
     );

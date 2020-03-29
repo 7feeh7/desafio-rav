@@ -4,7 +4,7 @@ import BoardContext from '../Board/context';
 
 import { Container } from './styles';
 
-export default function Card({ data, index, listIndex, idList }) {
+export default function Card({ data, index, listIndex, listId }) {
 
     const ref = useRef();
     const { move } = useContext(BoardContext);
@@ -43,7 +43,7 @@ export default function Card({ data, index, listIndex, idList }) {
             if(draggedIndex > targetIndex && draggedTop > targetCenter){
                 return;
             }
-            item.card.grupo.id = idList;
+            item.card.grupo.id = listId;
             move(draggedListIndex, targetListIndex, draggedIndex, targetIndex, item.card);
             item.index = targetIndex;
             item.listIndex = targetListIndex;

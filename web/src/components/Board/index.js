@@ -11,12 +11,12 @@ import { Container } from './styles';
 
 export default function Board() {
     const[lists, setLists] = useState([]);
-
+    
+    async function getList() {
+        const response = await api.get('/groups');
+        setLists(response.data);
+    }
     useEffect(() => {
-        async function getList() {
-            const response = await api.get('/groups');
-            setLists(response.data);
-        }
         getList();
     }, []);
 
@@ -32,8 +32,8 @@ export default function Board() {
     }
 
     async function handleCard(data) {
-        const response = await api.post('/cards', data);
-        return response;
+        await api.post('/cards', data);
+        getList();
     }
 
 
@@ -50,7 +50,7 @@ export default function Board() {
     return (
         <BoardContext.Provider value={{ lists, move }}>
             <Container>
-                {lists.map((list, index) => <List key={list.id} index={index}  data={list} onDelete={handleDeleteList} />)}
+                {lists.map((list, index) => <List key={list.id} index={index}  data={list} onDelete={handleDeleteList} onSubmit={handleCard}/>)}
                 <ListForm onSubmit={handleList} />
             </Container>
         </BoardContext.Provider>

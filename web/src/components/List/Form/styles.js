@@ -38,6 +38,7 @@ export const Container = styled.div`
     }
 
     ${props => props.visibilityForm && css`
+    
         header{
             display: none;
         }
