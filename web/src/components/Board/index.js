@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import produce from 'immer';
 import BoardContext from './context';
 
-import api from '../../service/api';
+import api from '../../services/api';
 
 import List from '../List';
 import AddList from '../List/Register';
@@ -25,6 +25,7 @@ export default function Board() {
         getList();
         // const response = await api.post('/groups', data);
         // setLists([...lists, response.data]);
+
     }
 
     async function handleDeleteList(itemId) {

@@ -8,11 +8,14 @@ export default function Form({ formRef, visibilityForm, list, onSubmit }) {
     const[name, setName] = useState('');
 
     useEffect(() => {
-        if(list){
-            setName(list.name)
-        }
         inputRef.current.focus();
     }, [visibilityForm]);
+
+    useEffect(() => {
+        if(list) {
+            setName(list.nome);
+        }
+    }, [list]);
 
     const handleSubmit = async (e) => {
         if(e.keyCode === 13 && name) {
@@ -21,8 +24,9 @@ export default function Form({ formRef, visibilityForm, list, onSubmit }) {
                 await onSubmit({ id: list.id, nome: name });
             } else {
                 await onSubmit({ nome: name  });
+                setName('');
             }
-            setName('');
+            
         }
     }
     
@@ -35,6 +39,7 @@ export default function Form({ formRef, visibilityForm, list, onSubmit }) {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     onKeyDown={e => handleSubmit(e)}
+                    placeholder="Insira o nome do grupo"
                     required
                 />
             </form>
