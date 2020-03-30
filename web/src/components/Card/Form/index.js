@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container } from './styles';
 
-export default function Form({ listId, onSubmit }) {
+export default function Form({ listId, dataCardUpdate, onSubmit }) {
+
     const[descricao, setDescricao] = useState('');
+
+    useEffect(() => {
+
+        if(dataCardUpdate) {
+            setDescricao(dataCardUpdate.descricao);
+        }
+    }, [dataCardUpdate]);
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        await onSubmit({ descricao : descricao, grupo: { id: listId }});
+
+        if(dataCardUpdate){
+            await onSubmit({ id: dataCardUpdate.id, descricao : descricao, grupo: { id: listId }});
+        } else {
+            await onSubmit({ descricao : descricao, grupo: { id: listId }});
+        }
+
+        setDescricao('');
     }
     
     return(
         <Container>
-            <form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    onChange={e => setDescricao(e.target.value)}
-                    required
-                    />
+            <form onSubmit={e => handleSubmit(e)}>
+                <input type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Insira um título para este cartão..."  required />
                 <button type="submit">Salvar</button>
             </form>
         </Container>

@@ -7,22 +7,29 @@ import Card from '../Card';
 import CardModal from '../Card/Modal';
 
 export default function List({ data, index: listIndex, onDelete, onSubmit }) {
-    const modalRef = useRef();
-    const[idTeste, setIdTeste] = useState('');
+    const modalRef = useRef(null);
+
+    const[listId, setIdList] = useState('');
+    const[dataCardUpdate, setDataCardUpdate] = useState('');
     const[visibilityCard, setVisibilityCard] = useState(false);
 
-    const showModal = (idList) => {
-        setIdTeste(idList);
+    const showModal = (idList, data) => {
+        setIdList(idList);
+        setDataCardUpdate(data);
         setVisibilityCard(true);
         document.body.addEventListener("click", closeModal);
     }
 
     const closeModal = (e) => {
         const contain = modalRef.current.contains(e.target);
+    
         if(!contain) {
             setVisibilityCard(false);
             document.removeEventListener("click", closeModal);
+        } else {
+            return false;
         }
+
     }
 
     const handleDelete = async(itemId) => {
@@ -45,6 +52,8 @@ export default function List({ data, index: listIndex, onDelete, onSubmit }) {
             <ul>
                 {data.cards.map((card, index) => (
                     <Card 
+                        showModal={showModal}
+                        closeModal={closeModal}
                         key={card.id} 
                         listIndex={listIndex}
                         index={index} 
@@ -58,7 +67,7 @@ export default function List({ data, index: listIndex, onDelete, onSubmit }) {
                 </button>  
             </ul>
 
-            <CardModal modalRef={modalRef} listId={idTeste} visibilityCard={visibilityCard} onSubmit={onSubmit} />
+            <CardModal modalRef={modalRef} listId={listId} dataCardUpdate={dataCardUpdate} visibilityCard={visibilityCard} onSubmit={onSubmit} />
         </Container>
     );
 }

@@ -4,8 +4,7 @@ import BoardContext from '../Board/context';
 
 import { Container } from './styles';
 
-export default function Card({ data, index, listIndex, listId }) {
-
+export default function Card({ data, index, listIndex, listId, showModal}) {
     const ref = useRef();
     const { move } = useContext(BoardContext);
     const[{ isDragging }, dragRef] = useDrag({
@@ -53,7 +52,7 @@ export default function Card({ data, index, listIndex, listId }) {
     dragRef(dropRef(ref));
 
     return (
-        <Container ref={ref} isDragging={isDragging}>
+        <Container onClick={() => showModal(listId, data)} ref={ref} isDragging={isDragging}>
             <p>{data.descricao}</p>
         </Container>
     );
