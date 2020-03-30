@@ -6,6 +6,7 @@ import { Container } from './styles';
 
 export default function Card({ data, index, listIndex, listId, showModal}) {
     const ref = useRef();
+    
     const { move } = useContext(BoardContext);
     const[{ isDragging }, dragRef] = useDrag({
         item: { type: 'CARD', index, listIndex, card:{id: data.id, descricao: data.descricao, grupo: {id: ''}}  },

@@ -7,7 +7,7 @@ import Card from '../Card';
 import CardModal from '../Card/Modal';
 
 export default function List({ data, index: listIndex, onDelete, onSubmit }) {
-    const modalRef = useRef(null);
+    const modalRef = useRef();
 
     const[listId, setIdList] = useState('');
     const[dataCardUpdate, setDataCardUpdate] = useState('');
@@ -21,13 +21,12 @@ export default function List({ data, index: listIndex, onDelete, onSubmit }) {
     }
 
     const closeModal = (e) => {
-        const contain = modalRef.current.contains(e.target);
-    
-        if(!contain) {
-            setVisibilityCard(false);
-            document.removeEventListener("click", closeModal);
-        } else {
-            return false;
+        if( modalRef.current) {
+            const contain = modalRef.current.contains(e.target);
+            if(!contain) {
+                setVisibilityCard(false);
+                document.removeEventListener("click", closeModal);
+            } 
         }
 
     }
@@ -53,7 +52,6 @@ export default function List({ data, index: listIndex, onDelete, onSubmit }) {
                 {data.cards.map((card, index) => (
                     <Card 
                         showModal={showModal}
-                        closeModal={closeModal}
                         key={card.id} 
                         listIndex={listIndex}
                         index={index} 

@@ -26,6 +26,7 @@ export default function Form({ onSubmit }) {
         if(e.keyCode === 13 && name) {
             e.preventDefault();
             await onSubmit({ nome: name, cards: [] });
+            setName('');
         }
     }
 
@@ -39,10 +40,12 @@ export default function Form({ onSubmit }) {
 
             <form >
                 <input 
+                    type="text"
+                    value={name}
                     placeholder="Insira o nome do grupo"
-                    required
                     onChange={e => setName(e.target.value)} 
                     onKeyDown={e => handleSubmit(e)}
+                    required
                 />
             </form>    
         </Container>
