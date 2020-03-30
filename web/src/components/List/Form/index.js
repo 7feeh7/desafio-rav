@@ -1,53 +1,43 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-import { MdAdd } from 'react-icons/md';
 import { Container } from './styles';
 
-export default function Form({ onSubmit }) {
-    const ref = useRef();
-    const[visibilityForm, setVisibilityForm] = useState('');
+export default function Form({ formRef, visibilityForm, list, onSubmit }) {
+    const inputRef = useRef();
+
     const[name, setName] = useState('');
 
-
-    const showForm = () => {
-        setVisibilityForm(true);
-        document.body.addEventListener("click", closeForm);
-    }
-
-    const closeForm = e => {
-        const contain = ref.current.contains(e.target);
-        if(!contain){
-            setVisibilityForm(false);
-            document.removeEventListener("click", closeForm);
+    useEffect(() => {
+        if(list){
+            setName(list.name)
         }
-    }
+        inputRef.current.focus();
+    }, [visibilityForm]);
 
     const handleSubmit = async (e) => {
         if(e.keyCode === 13 && name) {
             e.preventDefault();
-            await onSubmit({ nome: name, cards: [] });
+            if(list) {
+                await onSubmit({ id: list.id, nome: name });
+            } else {
+                await onSubmit({ nome: name  });
+            }
             setName('');
         }
     }
-
+    
     return(
-        <Container ref={ref} visibilityForm={visibilityForm}>
-            <header>
-                <button onClick={showForm}>
-                    Novo grupo <MdAdd />
-                </button>
-            </header>
-
-            <form >
-                <input 
+        <Container ref={formRef} visibilityForm={visibilityForm}>
+            <form>
+                <input
+                    ref={inputRef} 
                     type="text"
                     value={name}
-                    placeholder="Insira o nome do grupo"
-                    onChange={e => setName(e.target.value)} 
+                    onChange={e => setName(e.target.value)}
                     onKeyDown={e => handleSubmit(e)}
                     required
                 />
-            </form>    
+            </form>
         </Container>
-    );
+    ); 
 }

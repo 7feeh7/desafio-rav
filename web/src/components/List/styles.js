@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
     padding: 0 15px;
@@ -42,5 +42,13 @@ export const Container = styled.div`
         font-size: 20px;
         cursor: pointer;
     }
+
+    ${props => props.headerList && css`
+        header {
+            display: none;
+        }
+    
+    `}
+    
 
 `;

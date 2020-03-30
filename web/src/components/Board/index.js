@@ -5,7 +5,7 @@ import BoardContext from './context';
 import api from '../../service/api';
 
 import List from '../List';
-import ListForm from '../List/Form';
+import AddList from '../List/Register';
 
 import { Container } from './styles';
 
@@ -21,8 +21,10 @@ export default function Board() {
     }, []);
 
     async function handleList(data) {
-        const response = await api.post('/groups', data);
-        setLists([...lists, response.data]);
+        await api.post('/groups', data);
+        getList();
+        // const response = await api.post('/groups', data);
+        // setLists([...lists, response.data]);
     }
 
     async function handleDeleteList(itemId) {
@@ -50,8 +52,8 @@ export default function Board() {
     return (
         <BoardContext.Provider value={{ lists, move }}>
             <Container>
-                {lists.map((list, index) => <List key={list.id} index={index}  data={list} onDelete={handleDeleteList} onSubmit={handleCard}/>)}
-                <ListForm onSubmit={handleList} />
+                {lists.map((list, index) => <List key={list.id} index={index}  data={list} onDelete={handleDeleteList} onSubmit={handleCard} updateGroup={handleList}/>)}
+                <AddList onSubmit={handleList} />
             </Container>
         </BoardContext.Provider>
     );
