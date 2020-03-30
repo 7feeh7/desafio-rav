@@ -27,7 +27,8 @@ export default function Form({ listId, dataCardUpdate, onSubmit }) {
     return(
         <Container>
             <form onSubmit={e => handleSubmit(e)}>
-                <input type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Insira um título para este cartão..."  required />
+                <textarea type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Descrever atividade..."  required></textarea>
+                {/* <input type="text" value={descricao} onChange={e => setDescricao(e.target.value)} placeholder="Insira um título para este cartão..."  required /> */}
                 <button type="submit">Salvar</button>
             </form>
         </Container>

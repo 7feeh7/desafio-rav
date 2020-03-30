@@ -6,10 +6,9 @@ export const Container = styled.div`
         margin-top: 15px;
         padding:10px;
 
-        input {
-            height: 42px;
+        textarea {
             width: 100%;
-            font-size: 20px;
+            font-size: 19px;
             color: #333;
             border-radius: 5px;
             border: 1px solid rgba(0,0,0,.2);
