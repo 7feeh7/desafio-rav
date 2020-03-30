@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
-import Form from '../Form';
+
+import Form from '../../Form/List';
 
 import { MdAdd } from 'react-icons/md';
 import { Container } from './styles';

@@ -5,7 +5,7 @@ import BoardContext from './context';
 import api from '../../services/api';
 
 import List from '../List';
-import AddList from '../List/Register';
+import AddList from '../List/AddList';
 
 import { Container } from './styles';
 
@@ -23,9 +23,6 @@ export default function Board() {
     async function handleList(data) {
         await api.post('/groups', data);
         getList();
-        // const response = await api.post('/groups', data);
-        // setLists([...lists, response.data]);
-
     }
 
     async function handleDeleteList(itemId) {

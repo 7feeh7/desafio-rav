@@ -1,8 +1,7 @@
 import React from 'react';
-import Form from '../Form';
+import Form from '../../Form/Card';
 
 import { Container } from './styles';
-
 
 export default function Modal({ listId, dataCardUpdate, visibilityCard, modalRef, onSubmit }) {
     return(

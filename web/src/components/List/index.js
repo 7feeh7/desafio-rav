@@ -6,7 +6,7 @@ import { Container } from './styles';
 import Card from '../Card';
 import CardModal from '../Card/Modal';
 
-import Form from './Form';
+import Form from '../Form/List';
 
 export default function List({ data, index: listIndex, onDelete, onSubmit, updateGroup }) {
     const modalRef = useRef(null);
@@ -65,7 +65,8 @@ export default function List({ data, index: listIndex, onDelete, onSubmit, updat
                     <MdClose size={24} color="#fff" onClick={() => handleDelete(data.id)} />
                 </button>
             </header>
-            <Form formRef={inputListRef} visibilityForm={visibilityInputList} list={data} onSubmit={updateGroup}/>
+            
+            <Form formRef={inputListRef} visibilityForm={visibilityInputList} list={data} onSubmit={updateGroup} closeForm={closeInputList}/>
            
             <ul>
                 {data.cards.map((card, index) => (

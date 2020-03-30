@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 import { Container } from './styles';
 
-export default function Form({ formRef, visibilityForm, list, onSubmit }) {
+export default function Form({ formRef, visibilityForm, list, onSubmit, closeForm }) {
     const inputRef = useRef();
 
     const[name, setName] = useState('');
@@ -22,6 +22,7 @@ export default function Form({ formRef, visibilityForm, list, onSubmit }) {
             e.preventDefault();
             if(list) {
                 await onSubmit({ id: list.id, nome: name });
+                closeForm();
             } else {
                 await onSubmit({ nome: name  });
                 setName('');
