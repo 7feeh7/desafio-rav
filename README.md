@@ -1,6 +1,6 @@
 # desafio-rav
 ![tela-principal](https://user-images.githubusercontent.com/20801260/77972842-e210d100-72c8-11ea-85ef-1c61709ee85f.JPG)
-Desafio de programação com intuito de demonstrar meu conhecimento nas seguintes tecnologias.
+Desafio de programação com intuito de demonstrar meus conhecimentos nas seguintes tecnologias.
 ## Tecnologias
 - [PostgreSQL](https://www.postgresql.org/)
 - [Spring Boot](https://spring.io/projects/spring-boot)
